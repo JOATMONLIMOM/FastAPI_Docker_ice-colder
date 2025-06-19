@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vending Machine Admin</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white font-sans">
+    <div id="feedback" class="text-green-400 mt-4 font-semibold"></div>
+
+    <div class="max-w-3xl mx-auto p-6">
+
+
+        <h1 class="text-3xl font-bold mb-6">🛠 Vending Machine Admin Panel</h1>
+
+        <div id="status-panel" 
+             hx-get="/status" 
+             hx-trigger="every 1s" 
+             hx-swap="innerHTML">
+            <!-- Live status will be loaded here -->
+            <div>Loading status...</div>
+        </div>
+
+        <div class="mt-6 space-x-2">
+            <button 
+            hx-post="/action/restart" 
+            hx-target="#feedback"
+            hx-swap="innerHTML"
+            class="bg-blue-500 px-4 py-2 rounded">
+            Restart
+            </button>      
+            
+            <button 
+            hx-post="/action/reset" 
+            hx-target="#feedback"
+            hx-swap="innerHTML"
+            class="bg-yellow-500 px-4 py-2 rounded">
+            Reset
+            </button>
+
+            <button 
+            hx-post="/action/shutdown" 
+            hx-target="#feedback"
+            hx-swap="innerHTML"
+            class="bg-red-600 px-4 py-2 rounded">
+            Shutdown
+            </button>            
+
+        </div>
+
+        <div class="flex gap-2 mb-4">
+            <button 
+                hx-get="/config/machine" 
+                hx-target="#inventory-box" 
+                hx-swap="innerHTML"
+                class="bg-slate-700 text-white px-3 py-1 rounded">
+                🛠 View Machine Info
+            </button>
+
+            <button 
+                hx-get="/inventory" 
+                hx-target="#inventory-box" 
+                hx-swap="innerHTML"
+                class="bg-green-700 text-white px-3 py-1 rounded">
+                📦 View Product Inventory
+            </button>
+        </div>
+
+        
+        <div id="inventory-box" 
+            hx-get="/inventory" 
+            hx-trigger="load" 
+            hx-swap="innerHTML">
+            Loading...
+        </div>
+
+
+        <h3 class="text-xl font-semibold mt-8 mb-2">📄 Recent Logs</h2>
+        <div id="log-box"
+            hx-get="/logs"
+            hx-trigger="every 5s"
+            hx-swap="innerHTML">
+        <div>Loading logs...</div>
+        </div>
+
+
+    </div>
+</body>
+</html>
