@@ -1,6 +1,6 @@
 # services/config_store.py
 from pathlib import Path
-from config.config_model import ConfigModel, Product
+from models.config_model import ConfigModel, Product
 from loguru import logger
 CONFIG_PATH = Path("config.json")
 
