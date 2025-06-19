@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Docker Image",
+            "type": "shell",
+            "command": "docker compose build",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Run FastAPI (Docker Compose)",
+            "type": "shell",
+            "command": "docker compose up",
+            "group": "test",
+            "problemMatcher": []
+        }
+    ]
+}
