@@ -7,11 +7,14 @@ RUN pip install uv
 # Set workdir
 WORKDIR /app
 
-# Copy project files
-COPY . /app
+# Copy dependency files first for better caching
+COPY pyproject.toml uv.lock ./
 
 # Install dependencies with uv
-RUN uv pip install --system -r requirements.txt
+RUN uv pip sync pyproject.toml
+
+# Copy the rest of the project files
+COPY . .
 
 # Expose port
 EXPOSE 8000
