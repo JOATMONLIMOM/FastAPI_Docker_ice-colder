@@ -6,7 +6,7 @@ import random
 from loguru import logger
 
 # Setup Loguru: log debug messages to a file with rotation and also print to console.
-logger.add("config_debug.log", level="DEBUG", rotation="1 MB")
+logger.add("logs/config_debug.log", level="DEBUG", rotation="1 MB")
 
 # Define the Product model with defaults.
 class Product(BaseModel):

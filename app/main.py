@@ -2,6 +2,7 @@ from app.api.v1.controller.vmc import VMC  # Import the VMC class from the contr
 
 import os
 import sys
+from pathlib import Path
 from time import sleep
 from loguru import logger
 from app.models.config_model import ConfigModel
@@ -31,27 +32,32 @@ def setup_logging():
     Set up logging configuration for the application.
     """
     # Create the LOGS subdirectory if it doesn't exist
-    os.makedirs("LOGS", exist_ok=True)
+    LOG_DIR = Path("/app/logs")
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+    # os.makedirs("LOGS", exist_ok=True)
 
     # Remove any default logging handlers
     logger.remove()
     # log file with rotation and retention settings
-    logger.add(
-        "LOGS/vmc.log",
+    logger.add(LOG_DIR / "app.log",
         serialize=False,
         rotation="00:00",
         retention="300 days",
         compression="zip",
-        format="{message};{level} {time:YYYY-MM-DD HH:mm:ss}"
+        format="{message};{level} {time:YYYY-MM-DD HH:mm:ss}", 
+        enqueue=True  # to handle multi-thread code
     )
+    logger.debug("🚀 Loguru file sink initialized")
     # Add console logging for INFO and ERROR messages (plain text, with custom format)
     logger.add(
         sys.stdout,
-        level="INFO",
+        level="DEBUG",
         serialize=False,
-        format="{message}\n{level}: {time:YYYY-MM-DD HH:mm:ss}"
+        format="{message}\n{level}: {time:YYYY-MM-DD HH:mm:ss}",
+        enqueue=True  # to handle multi-thread code
     )
-
+    logger.debug("🚀 Loguru console sink initialized")
 
 def _deep_merge(default: dict, source: dict) -> dict:
     """
