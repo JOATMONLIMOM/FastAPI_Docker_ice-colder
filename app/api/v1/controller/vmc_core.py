@@ -1,6 +1,6 @@
 # ========== vmc_core.py ==========
 """
-vmc_core.py
+app.api.v1.vmc_core.py
 
 Pure finite state machine (FSM) definition for the Vending Machine Controller (VMC).
 This module contains only the state definitions, transition table, and simple callbacks

@@ -1,11 +1,11 @@
-from api.v1.controller.vmc import VMC  # Import the VMC class from the controller module
+from app.api.v1.controller.vmc import VMC  # Import the VMC class from the controller module
 
 import os
 import sys
 from time import sleep
 from loguru import logger
-from models.config_model import ConfigModel
-# from hardware.tkinter_ui import VendingMachineUI  # removed in favor of local webserver dashboard
+from app.models.config_model import ConfigModel
+# from app.api.v1.hardware.tkinter_ui import VendingMachineUI  # removed in favor of local webserver dashboard
 import json  # For loading configuration
 from pydantic import ValidationError  # Handle Pydantic validation errors
 import shutil
@@ -13,8 +13,8 @@ import time
 
 from threading import Thread  # local webserver dashboard will be run in a separate thread
 import uvicorn
-from api.v1.web_interface.server import app
-from api.v1.web_interface import routes
+from app.api.v1.web_interface.server import app
+from app.api.v1.web_interface import routes
 
 def start_web_interface():
     logger.info("Starting web interface on http://localhost:8000")

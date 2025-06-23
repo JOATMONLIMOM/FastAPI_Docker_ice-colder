@@ -3,7 +3,7 @@ from typing import Dict
 import random
 
 from uuid import uuid4
-from services.config_store import add_product
+from app.services.config_store import add_product
 
 from fastapi.responses import HTMLResponse
 from fastapi import APIRouter, Request, Form
@@ -11,11 +11,11 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi import FastAPI
 
-from services.config_store import update_product
+from app.services.config_store import update_product
 
-from services.fsm_control import perform_command
+from app.services.fsm_control import perform_command
 
-from config.config_model import ConfigModel, Product
+from app.models.config_model import ConfigModel, Product
 
 config: ConfigModel = None
 

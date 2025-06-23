@@ -3,13 +3,13 @@
 """
 vmc_physical.py
 
-Program that integrates the pure FSM (from vmc_core.py) with actual hardware interfaces,
+Program that integrates the pure FSM (from app.api.v1.vmc_core.py) with actual hardware interfaces,
 user interface callbacks, and any external services (e.g., payment gateways, MDB bus).
 """
-from vmc_core import VMC
+from app.api.v1.vmc_core import VMC
 from loguru import logger
-from services.payment_gateway_manager import PaymentGatewayManager
-from hardware.mdb_interface import MDBInterface
+from app.services.payment_gateway_manager import PaymentGatewayManager
+from app.api.v1.hardware.mdb_interface import MDBInterface
 
 # Example setup: instantiate core FSM with real product/config data
 # Load Pydantic ConfigModel elsewhere and extract necessary fields

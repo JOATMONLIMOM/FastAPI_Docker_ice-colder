@@ -1,9 +1,9 @@
 # controller/vmc.py
 from transitions import Machine
 from loguru import logger
-from services.payment_gateway_manager import PaymentGatewayManager
-from hardware.mdb_interface import MDBInterface
-from models.config_model import ConfigModel  # Import the Pydantic model
+from app.services.payment_gateway_manager import PaymentGatewayManager
+from app.api.v1.hardware.mdb_interface import MDBInterface
+from app.models.config_model import ConfigModel  # Import the Pydantic model
 
 # Global variable for state change log prefix
 STATE_CHANGE_PREFIX = "***### STATE CHANGE ###***"
