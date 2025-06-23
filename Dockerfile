@@ -1,20 +1,19 @@
-# Dockerfile for FastAPI + uv
-FROM python:3.11-slim
-
-# Install uv
-RUN pip install uv
+FROM python:3.12-slim
 
 # Set workdir
 WORKDIR /app
 
-# Ensure /app is in PYTHONPATH
-ENV PYTHONPATH=/app
-
 # Copy dependency files first for better caching
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml ./
 
-# Install dependencies with uv
-RUN uv pip sync pyproject.toml --system
+# Install pip tools to convert pyproject.toml to requirements.txt
+RUN pip install pip-tools
+
+# Compile requirements.txt from pyproject.toml
+RUN pip-compile pyproject.toml
+
+# Install dependencies
+RUN pip install -r requirements.txt
 
 # Copy the rest of the project files
 COPY . .
