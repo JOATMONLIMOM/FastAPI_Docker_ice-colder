@@ -13,7 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/static", StaticFiles(directory="web_interface/static"), name="static")
-templates = Jinja2Templates(directory="web_interface/templates")
+app.mount("/static", StaticFiles(directory="app/api/v1/web_interface/static"), name="static")
+templates = Jinja2Templates(directory="app/api/v1/web_interface/templates")
 
 routes.attach_routes(app, templates)
